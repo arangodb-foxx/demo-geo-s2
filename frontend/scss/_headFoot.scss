@@ -1,0 +1,51 @@
+%bar {
+  background: $c-header;
+  color: $c-header-text;
+  left: 0;
+  position: fixed;
+  right: 0;
+  text-align: center;
+
+  .pure-menu-heading {
+    float: left;
+    color: #fff;
+  }
+
+  .pure-menu-list {
+    float: right;
+  }
+}
+
+body {
+  background: $c-body;
+}
+
+nav {
+  @extend %bar;
+
+  img {
+    height: 33px;
+    margin-left: 10px;
+    float: left;
+  }
+
+  top: 0;
+
+  li {
+    &.selected,
+    &:hover {
+      background: $c-body;
+      color: $c-body-text;
+    }
+  }
+}
+
+footer {
+  @extend %bar;
+  bottom: 0;
+
+  p {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}

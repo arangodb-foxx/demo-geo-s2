@@ -1,0 +1,14 @@
+/* PURE CSS */
+@import '../css/pure-min.scss';
+/* FONT AWESOME */
+@import '../css/font-awesome.min.scss';
+/* LEAFLET */
+@import '../css/leaflet.scss';
+
+/* ARANGO */
+@import 'abstracts';
+@import 'colors';
+@import 'headFoot';
+@import 'buttons';
+@import 'global';
+@import 'leaflet';

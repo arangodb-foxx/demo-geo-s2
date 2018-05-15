@@ -1,0 +1,25 @@
+{
+  "name": "foxx-ui-template",
+  "version": "1.0.0",
+  "description": "A minimalistic ui template for ArangoDB for foxx using pure css",
+  "author": "Heiko Kernbach",
+  "license": "Apache 2",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-concat-in-order": "^0.1.6",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^1.0.0",
+    "matchdep": "^0.3.0",
+    "sass": "^0.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/arangodb/foxx-api-keys.git"
+  },
+  "dependencies": {
+    "grunt-cli": "^1.2.0"
+  }
+}
