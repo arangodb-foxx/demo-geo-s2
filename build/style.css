@@ -3353,10 +3353,60 @@ body {
   font-weight: 100;
   margin-top: 44px; }
 
-.content {
-  margin: 10px; }
-  .content h3 {
-    text-align: center; }
+nav {
+  z-index: 700; }
+
+.content h3 {
+  text-align: center; }
+
+.section-left {
+  margin-top: -10px;
+  width: 100%;
+  height: 100%; }
+  .section-left .map {
+    height: 100%; }
+
+.section-right {
+  width: 450px;
+  position: absolute;
+  margin-top: 26px;
+  top: 20px;
+  right: 0;
+  z-index: 600; }
+  .section-right .button-bar {
+    width: 400px;
+    margin-top: 0;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    height: 100%;
+    border-radius: 3px; }
+    .section-right .button-bar button {
+      width: 100%;
+      margin-bottom: 5px;
+      padding: 5px;
+      font-size: 11pt; }
+    .section-right .button-bar .label {
+      font-size: 11pt;
+      margin-top: 10px;
+      margin-bottom: 5px; }
+  .section-right textarea {
+    height: 100px; }
+  .section-right input {
+    height: 30px; }
+  .section-right textarea, .section-right input {
+    width: 100%;
+    font-size: 10pt;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    margin-bottom: 5px; }
+
+.leaflet-control-attribution {
+  margin-top: -40px !important; }
+
+footer {
+  font-size: 10pt;
+  z-index: 700; }
 
 .map {
   height: 85%;

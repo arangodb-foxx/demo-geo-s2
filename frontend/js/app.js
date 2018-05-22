@@ -34,6 +34,186 @@
     });
   };
 
+  var geoStyle = {
+    color: '#3498db',
+    opacity: 1,
+    weight: 3
+  };
+
+  var geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: '#2ecc71',
+    color: 'white',
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.64
+  };
+
+  var geojsonMarkerPoint = {
+    radius: 8,
+    fillColor: 'rgb(213, 54, 61)',
+    color: 'white',
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.64
+  };
+
+  var geojsonMarkerOptionsInter = {
+    radius: 8,
+    fillColor: 'rgb(213, 54, 61)',
+    color: 'white',
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.64
+  };
+  
+  var geoDistanceBetween = function () {
+    clearAll();
+    $.ajax({
+      cache: false,
+      type: 'GET',
+      url: 'geoDistanceBetween',
+      contentType: 'application/json',
+      processData: false,
+      success: function (data) {
+        renderStats(data);
+        // render visual help
+        var c1 = L.circle([40.689306,-74.044500], 26000).addTo(map);
+        var c2 = L.circle([40.689306,-74.044500], 25000).addTo(map);
+        var x = new L.Marker([40.689306,-74.044500]).addTo(map).bindTooltip('Statue of Liberty', {sticky: true, permanent: true});
+        markers.push(c1);
+        markers.push(c2);
+        markers.push(x);
+
+        var markerslocal = [];
+        var geojson;
+        data.results.forEach(function (restaurant) {
+          geojson = new L.GeoJSON(restaurant, {
+            pointToLayer: function (feature, latlng) {
+              var res = L.circleMarker(latlng, geojsonMarkerPoint);
+              return res;
+            }
+          }).addTo(map);
+          markers.push(geojson);
+          markerslocal.push(geojson);
+          var show = new L.featureGroup(markerslocal);
+          map.fitBounds(show.getBounds());
+        });
+
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    });
+  };
+
+  var geoIntersection = function () {
+    clearAll();
+    $.ajax({
+      cache: false,
+      type: 'GET',
+      url: 'geoIntersection',
+      contentType: 'application/json',
+      processData: false,
+      success: function (data) {
+        var markerslocal = [];
+        var geojson;
+        data.results.forEach(function (restaurant) {
+          geojson = new L.GeoJSON(restaurant, geojsonMarkerOptions).addTo(map);
+          markers.push(geojson);
+          markerslocal.push(geojson);
+          var show = new L.featureGroup(markerslocal);
+          map.fitBounds(show.getBounds());
+        });
+        var geojsonx = new L.GeoJSON(data.polygon, geojsonMarkerOptionsInter).addTo(map)
+        .bindPopup('Custom intersection area.')
+        .openPopup();
+        markers.push(geojsonx);
+        renderStats(data);
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    });
+  };
+
+  var geoDistanceNearest = function () {
+    clearAll();
+    $.ajax({
+      cache: false,
+      type: 'GET',
+      url: 'geoDistanceNearest',
+      contentType: 'application/json',
+      processData: false,
+      success: function (data) {
+        var markerslocal = [];
+        var geojson;
+        data.results.forEach(function (restaurant) {
+          geojson = new L.GeoJSON(restaurant, {
+            pointToLayer: function (feature, latlng) {
+              var res = L.circleMarker(latlng, geojsonMarkerPoint);
+              return res;
+            }
+          }).addTo(map);
+          markers.push(geojson);
+          markerslocal.push(geojson);
+          var show = new L.featureGroup(markerslocal);
+          map.fitBounds(show.getBounds());
+        });
+        var marker = L.marker([40.689306, -74.044500]).addTo(map)
+        .bindPopup('Name: Statue of Liberty')
+        .openPopup();
+        markers.push(marker);
+        renderStats(data);
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    });
+  };
+
+  var geoDistance = function () {
+    clearAll();
+    $.ajax({
+      cache: false,
+      type: 'GET',
+      url: 'geoDistance',
+      contentType: 'application/json',
+      processData: false,
+      success: function (data) {
+        var markerslocal = [];
+        var geojson;
+        data.results.forEach(function (restaurant) {
+          geojson = new L.GeoJSON(restaurant, {
+            pointToLayer: function (feature, latlng) {
+              var res = L.circleMarker(latlng, geojsonMarkerPoint);
+              return res;
+            }
+          }).addTo(map);
+          markers.push(geojson);
+          markerslocal.push(geojson);
+          var show = new L.featureGroup(markerslocal);
+          map.fitBounds(show.getBounds());
+        });
+        var marker = L.marker([40.689306, -74.044500]).addTo(map)
+        .bindPopup('Name: Statue of Liberty')
+        .openPopup();
+        markers.push(marker);
+        renderStats(data);
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    });
+  };
+
+  var renderStats = function (data) {
+    // textareas
+    $('#queryTextarea').val(data.query);
+    console.log(data.stats.stats.executionTime);
+    $('#queryExecutionTime').val(JSON.stringify(data.stats.stats.executionTime) + ' seconds');
+  };
+
   var getRandomNeighborhood = function () {
     $.ajax({
       cache: false,
@@ -44,12 +224,12 @@
       success: function (data) {
         // create a red polygon from an array of LatLng points
         if (data.geometry.type === 'Polygon') {
-          var latlngs = [];
-          // fill latlng array
-          data.geometry.coordinates[0].forEach(function (value) {
-            latlngs.push([value[1], value[0]]);
-          });
-          var polygon = L.polygon(latlngs, {color: 'red', id: data._id}).addTo(map);
+          var options = geojsonMarkerOptions;
+          options.id = data._id;
+          var polygon = new L.GeoJSON(data.geometry, geojsonMarkerOptions).addTo(map)
+          .bindPopup('Name: ' + data.name + '.<br>Id: ' + data._id + '<br><br>Click area to show restauraunts.')
+          .openPopup();
+
           polygons.push(polygon);
           polygon.on('click', function (x) {
             var id = x.target.options.id;
@@ -67,6 +247,7 @@
     });
   };
 
+  /*
   var geoContainsBenchmark = function () {
     $.ajax({
       cache: false,
@@ -113,7 +294,7 @@
         console.log(data);
       }
     });
-  };
+  };*/
 
   var getPointsInPolygon = function (id) {
     $.ajax({
@@ -123,11 +304,18 @@
       contentType: 'application/json',
       processData: false,
       success: function (data) {
-        data.forEach(function (obj) {
-          var marker = L.marker([obj.location.coordinates[1], obj.location.coordinates[0]]).addTo(map)
-          .bindPopup('Name: ' + obj.name + '.<br>Id: ' + obj._id)
+        var geojson;
+        renderStats(data);
+        data.result.forEach(function (restaurant) {
+          geojson = new L.GeoJSON(restaurant.location, {
+            pointToLayer: function (feature, latlng) {
+              var res = L.circleMarker(latlng, geojsonMarkerPoint);
+              return res;
+            }
+          }).addTo(map)
+          .bindPopup('Name: ' + restaurant.name + '.<br>Id: ' + restaurant._id)
           .openPopup();
-          markers.push(marker);
+          markers.push(geojson);
         });
       },
       error: function (data) {
@@ -140,6 +328,11 @@
     var latLngs = [ marker.getLatLng() ];
     var markerBounds = L.latLngBounds(latLngs);
     map.fitBounds(markerBounds);
+  };
+
+  var clearAll = function () {
+    clearMarkers();
+    clearPolygons();
   };
 
   var clearMarkers = function () {
@@ -168,14 +361,17 @@
     $('#randomNeighborhood').on('click', function () {
       getRandomNeighborhood();
     });
-    $('#geoContainsBenchmark').on('click', function () {
-      geoContainsBenchmark();
+    $('#geoDistance').on('click', function () {
+      geoDistance();
     });
-    $('#geoDistanceBenchmark').on('click', function () {
-      geoDistanceBenchmark();
+    $('#geoDistanceBetween').on('click', function () {
+      geoDistanceBetween();
     });
-    $('#geoNearBenchmark').on('click', function () {
-      geoNearBenchmark();
+    $('#geoDistanceNearest').on('click', function () {
+      geoDistanceNearest();
+    });
+    $('#geoIntersection').on('click', function () {
+      geoIntersection();
     });
     $('#clearAll').on('click', function () {
       clearMarkers();
