@@ -3379,7 +3379,8 @@ nav {
     background: rgba(255, 255, 255, 0.7);
     padding: 20px;
     height: 100%;
-    border-radius: 3px; }
+    border-radius: 3px;
+    padding-bottom: 40px; }
     .section-right .button-bar button {
       width: 100%;
       margin-bottom: 5px;
