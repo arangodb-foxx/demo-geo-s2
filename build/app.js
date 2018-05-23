@@ -19,9 +19,18 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
   var initMap = function () {
     map = L.map('map').setView([40.81949109558767, -73.93383000695911], 13);
 
+    /*
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+    */
+    L.tileLayer(
+     'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGtlcm5iYWNoIiwiYSI6ImNqaGowOWZ6YjAyZjYzMG1sMWNmanlya3IifQ.zUyh2nhwhbDRM8KvssjUyA', {
+       tileSize: 512,
+       zoomOffset: -1,
+       attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+     })
+   .addTo(map);
   };
 
   var getRandomRestaurant = function () {
