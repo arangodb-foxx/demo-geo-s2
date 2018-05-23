@@ -18,7 +18,7 @@
      'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGtlcm5iYWNoIiwiYSI6ImNqaGowOWZ6YjAyZjYzMG1sMWNmanlya3IifQ.zUyh2nhwhbDRM8KvssjUyA', {
        tileSize: 512,
        zoomOffset: -1,
-       attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+       attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | <a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>'
      })
    .addTo(map);
   };
