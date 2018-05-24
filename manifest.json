@@ -5,7 +5,7 @@
   "description": "A minimalistic geo example using Foxx and leaflet.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arangodb/foxx-ui-template.git"
+    "url": "https://github.com/arangodb-foxx/demo-geo-s2.git"
   },
   "author": "ArangoDB GmbH",
   "contributors": [
