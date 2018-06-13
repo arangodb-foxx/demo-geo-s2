@@ -41,6 +41,8 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
       contentType: 'application/json',
       processData: false,
       success: function (data) {
+        $('#queryTextarea').val("");
+        $('#queryExecutionTime').val("");
         var marker = L.marker([data.location.coordinates[1], data.location.coordinates[0]]).addTo(map)
         .bindPopup('Name: ' + data.name + '.<br>Id: ' + data._id)
         .openPopup();
@@ -242,6 +244,8 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
       contentType: 'application/json',
       processData: false,
       success: function (data) {
+        $('#queryTextarea').val("");
+        $('#queryExecutionTime').val("");
         // create a red polygon from an array of LatLng points
         if (data.geometry.type === 'Polygon') {
           var options = geojsonMarkerOptions;
