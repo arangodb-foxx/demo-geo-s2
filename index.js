@@ -171,6 +171,7 @@ router.get('/geoDistanceBetween', function (req, res) {
       FOR restaurant IN restaurants
         FILTER GEO_DISTANCE(statueOfLiberty, restaurant.location) <= 26000
         FILTER GEO_DISTANCE(statueOfLiberty, restaurant.location) >= 25000
+      LIMIT 100
     RETURN restaurant.location`;
   try {
     var query = db._query(queryString);
@@ -194,7 +195,7 @@ router.get('/geoDistance', function (req, res) {
     var queryString = `LET statueOfLiberty = GEO_POINT(-74.044500, 40.689306)
         FOR restaurant IN restaurants
           FILTER GEO_DISTANCE(statueOfLiberty, restaurant.location) <= 30000
-        LIMIT 500
+        LIMIT 100
       RETURN restaurant.location`;
   try {
     var query = db._query(queryString);

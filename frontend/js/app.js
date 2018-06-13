@@ -220,7 +220,8 @@
     // textareas
     $('#queryTextarea').val(data.query);
     console.log(data.stats.stats.executionTime);
-    $('#queryExecutionTime').val(JSON.stringify(data.stats.stats.executionTime) + ' seconds');
+    var number = Number(data.stats.stats.executionTime * 1000);
+    $('#queryExecutionTime').val(number.toFixed(2) + ' ms');
   };
 
   var getRandomNeighborhood = function () {
