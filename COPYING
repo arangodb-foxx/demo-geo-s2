@@ -3,3 +3,7 @@ Neighborhood data taken from
 made available under the Open Data Commons Attribution License (ODC-By) v1.0
 license. The full text of this license may be found at:
     http://opendatacommons.org/licenses/by/1.0/
+
+Adjusted the order of coordinate pairs so that the boundaries of
+GeoJSON Polygons are counter-clockwise and holes clockwise.
+
