@@ -22,7 +22,8 @@
     "arangodb": "3.4"
   },
   "scripts": {
-    "setup": "scripts/setup.js"
+    "setup": "scripts/setup.js",
+    "teardown": "scripts/teardown.js"
   },
   "main": "index.js",
   "files": {
